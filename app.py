@@ -1,17 +1,11 @@
 import streamlit as st
-from openai import OpenAI
-import os
 
-
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
-)
+import ollama
 
 
 def modify_message(original_message, reply_to_message):
-    completion = client.chat.completions.create(
-        model="gpt-4o",
+    completion = ollama.chat(
+        model="tinyllama",
         messages=[
             {
                 "role": "system",
@@ -30,7 +24,7 @@ def modify_message(original_message, reply_to_message):
             },
         ],
     )
-    return completion.choices[0].message.content
+    return completion["message"]["content"]
 
 
 st.title("Message Modifier App")
