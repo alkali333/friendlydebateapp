@@ -5,7 +5,7 @@ import ollama
 
 def modify_message(original_message, reply_to_message):
     completion = ollama.chat(
-        model="tinyllama",
+        model="dolphin-mistral:7b",
         messages=[
             {
                 "role": "system",
